@@ -91,10 +91,44 @@ vsp.SetParmVal(tail_wing,"Sec_Sweep_Location",section,0.01)
 vsp.SetParmVal(tail_wing,"Sweep_Location", section, 1)
 
 
-
-
-
 vsp.Update()
+
+
+
+fuselage = vsp.AddGeom("FUSELAGE")
+
+## Setting of overall length
+vsp.SetParmVal(fuselage,"Length","Design",1)
+vsp.SetParmVal(fuselage, "X_Rel_Location", "XForm",-0.1)
+vsp.Update()
+
+## Setting of crossections
+xsec_fuselage = vsp.GetXSecSurf(fuselage, 0)
+vsp.ChangeXSecShape(xsec_fuselage,1,vsp.XS_GENERAL_FUSE)
+
+vsp.ChangeXSecShape(xsec_fuselage,2,vsp.XS_GENERAL_FUSE)
+
+vsp.ChangeXSecShape(xsec_fuselage,3,vsp.XS_GENERAL_FUSE)
+vsp.Update()
+
+## number of cross sections: 5
+
+## Fuselage crossection: 2
+fuselage_section = "XSecCurve_1"
+vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
+vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
+
+## Fuselage crossection: 3
+fuselage_section = "XSecCurve_2"
+vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
+vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
+
+## Fuselage crossection: 4
+fuselage_section = "XSecCurve_3"
+vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
+vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
+
+
 
 
 vsp.WriteVSPFile("test.vsp3")
