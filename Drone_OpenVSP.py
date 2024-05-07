@@ -96,10 +96,11 @@ vsp.Update()
 
 
 fuselage = vsp.AddGeom("FUSELAGE")
-
+fuselage_length  = 0.9
 ## Setting of overall length
-vsp.SetParmVal(fuselage,"Length","Design",1)
+vsp.SetParmVal(fuselage,"Length","Design",fuselage_length)
 vsp.SetParmVal(fuselage, "X_Rel_Location", "XForm",-0.1)
+vsp.SetParmVal(fuselage, "Z_Rel_Location", "XForm",-0.035/1.2)
 vsp.Update()
 
 ## Setting of crossections
@@ -112,21 +113,97 @@ vsp.ChangeXSecShape(xsec_fuselage,3,vsp.XS_GENERAL_FUSE)
 vsp.Update()
 
 ## number of cross sections: 5
+## adding one cross section
+vsp.InsertXSec(fuselage,3, vsp.XS_GENERAL_FUSE)
+vsp.InsertXSec(fuselage,3, vsp.XS_GENERAL_FUSE)
+vsp.Update()
+## Fuselage crossection: 0
+fuselage_section = "XSec_0"
+vsp.SetParmVal(fuselage, "TopLAngle", fuselage_section, 85)
+vsp.SetParmVal(fuselage, "TopLStrength",fuselage_section,0.75)
+vsp.SetParmVal(fuselage, "RightLAngle", fuselage_section, 85)
+vsp.SetParmVal(fuselage, "RightLStrength",fuselage_section,0.75)
+vsp.Update()
 
+
+## Fuselage crossection: 1
+fuselage_section = "XSec_1"
+vsp.SetParmVal(fuselage, "XLocPercent", fuselage_section, 0.05/fuselage_length)
+vsp.SetParmVal(fuselage, "SectTess_U", fuselage_section, 10)
+vsp.Update()
+fuselage_section_shape = "XSecCurve_1"
+vsp.SetParmVal(fuselage,"Width",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage,"Height",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage, "TopStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "BotStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "UpStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "LowStr",fuselage_section_shape,1)
+vsp.Update()
 ## Fuselage crossection: 2
-fuselage_section = "XSecCurve_1"
-vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
-vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
-
+fuselage_section = "XSec_2"
+vsp.SetParmVal(fuselage, "XLocPercent", fuselage_section, 0.1/fuselage_length)
+vsp.SetParmVal(fuselage, "SectTess_U", fuselage_section, 10)
+vsp.Update()
+fuselage_section_shape = "XSecCurve_2"
+vsp.SetParmVal(fuselage,"Width",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage,"Height",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage, "TopStr",fuselage_section_shape,1.5)
+vsp.SetParmVal(fuselage, "BotStr",fuselage_section_shape,0.83)
+vsp.SetParmVal(fuselage, "UpStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "LowStr",fuselage_section_shape,0.75)
+vsp.Update()
 ## Fuselage crossection: 3
-fuselage_section = "XSecCurve_2"
-vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
-vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
+fuselage_section = "XSec_3"
+vsp.SetParmVal(fuselage, "XLocPercent", fuselage_section, 0.25)
+vsp.SetParmVal(fuselage, "SectTess_U", fuselage_section, 10)
+vsp.Update()
+fuselage_section_shape = "XSecCurve_3"
+vsp.SetParmVal(fuselage,"Width",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage,"Height",fuselage_section_shape,0.07)
+vsp.SetParmVal(fuselage, "TopStr",fuselage_section_shape,1.5)
+vsp.SetParmVal(fuselage, "BotStr",fuselage_section_shape,0.83)
+vsp.SetParmVal(fuselage, "UpStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "LowStr",fuselage_section_shape,0.75)
+vsp.Update()
 
 ## Fuselage crossection: 4
-fuselage_section = "XSecCurve_3"
-vsp.SetParmVal(fuselage,"Width",fuselage_section,0.1)
-vsp.SetParmVal(fuselage,"Height",fuselage_section,0.1)
+fuselage_section = "XSec_4"
+vsp.SetParmVal(fuselage, "XLocPercent", fuselage_section, 0.45)
+vsp.SetParmVal(fuselage, "ZLocPercent", fuselage_section, 0.035/1.5)
+vsp.SetParmVal(fuselage, "SectTess_U", fuselage_section, 20)
+vsp.Update()
+fuselage_section_shape = "XSecCurve_4"
+vsp.SetParmVal(fuselage,"Width",fuselage_section_shape,0.02)
+vsp.SetParmVal(fuselage,"Height",fuselage_section_shape,0.035/2)
+vsp.SetParmVal(fuselage, "TopStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "BotStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "UpStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "LowStr",fuselage_section_shape,1)
+vsp.Update()
+## Fuselage crossection: 5
+fuselage_section = "XSec_5"
+vsp.SetParmVal(fuselage, "XLocPercent", fuselage_section, 0.9)
+vsp.SetParmVal(fuselage, "ZLocPercent", fuselage_section, 0.035/1.5)
+vsp.SetParmVal(fuselage, "SectTess_U", fuselage_section, 10)
+vsp.Update()
+fuselage_section_shape = "XSecCurve_5"
+vsp.SetParmVal(fuselage,"Width",fuselage_section_shape,0.02)
+vsp.SetParmVal(fuselage,"Height",fuselage_section_shape,0.035/2)
+vsp.SetParmVal(fuselage, "TopStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "BotStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "UpStr",fuselage_section_shape,1)
+vsp.SetParmVal(fuselage, "LowStr",fuselage_section_shape,1)
+vsp.Update()
+
+## Fuselage crossection: 6
+fuselage_section = "XSec_6"
+vsp.SetParmVal(fuselage, "ZLocPercent", fuselage_section, 0.035/1.5)
+vsp.SetParmVal(fuselage, "TopLAngle", fuselage_section, -85)
+vsp.SetParmVal(fuselage, "TopLStrength",fuselage_section,0.45)
+vsp.SetParmVal(fuselage, "RightLAngle", fuselage_section, -85)
+vsp.SetParmVal(fuselage, "RightLStrength",fuselage_section,0.45)
+vsp.Update()
+
 
 
 
